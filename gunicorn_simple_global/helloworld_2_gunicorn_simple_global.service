@@ -1,0 +1,23 @@
+[Unit]
+Description=helloworld gunicorn simple daemon
+After=network.target
+
+
+[Service]
+PIDFile=/run/helloworld_2_gunicorn_simple_global/pid
+User=www-data
+Group=www-data
+RuntimeDirectory=helloworld_2_gunicorn_simple_global
+WorkingDirectory=/var/helloworld_2_gunicorn_simple_global
+ExecStart=gunicorn \
+	-w 1 \
+	--bind 127.0.0.1:8002 \
+	--pid /run/helloworld_2_gunicorn_simple_global/pid \
+	hello:app
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
