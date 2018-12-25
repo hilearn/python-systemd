@@ -1,0 +1,19 @@
+[Unit]
+Description=helloworld simple daemon
+After=network.target
+
+
+[Service]
+PIDFile=/run/helloworld_0_simplest/pid
+User=www-data
+Group=www-data
+RuntimeDirectory=helloworld_0_simplest
+WorkingDirectory=/var/helloworld_0_simplest
+ExecStart=python3.7 serve.py --port 8000
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
