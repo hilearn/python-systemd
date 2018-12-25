@@ -2,6 +2,7 @@ import argparse
 import http.server
 import socketserver
 from http import HTTPStatus
+from helpers import write_pid
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -15,7 +16,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, default=8000)
+    parser.add_argument('--pid', type=str, help='Location to store the pid.')
     args = parser.parse_args()
+
+    if args.pid is not None:
+        write_pid(args.pid)
 
     httpd = socketserver.TCPServer(('', args.port), Handler)
     httpd.serve_forever()

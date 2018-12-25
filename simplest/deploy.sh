@@ -3,18 +3,22 @@
 set -e
 set -x
 
-sudo cp helloworld_0_simplest.service /etc/systemd/system/
+project_name=helloworld_0_simplest
+destination=/var/$project_name
+
+sudo cp $project_name.service /etc/systemd/system/
 
 
-sudo mkdir -p /var/helloworld_0_simplest
-sudo chown -R www-data:www-data /var/helloworld_0_simplest
+sudo mkdir -p $destination
+sudo chown -R www-data:www-data $destination
 
 sudo -u www-data rsync -ra \
   --exclude .git/ \
   --filter=':- .gitignore' \
-  . /var/helloworld_0_simplest
+  . \
+  $destination
 
 
 # Reload and restart services
 sudo systemctl daemon-reload
-sudo service helloworld_0_simplest reload || sudo service helloworld_0_simplest start
+sudo service $project_name reload || sudo service $project_name start
