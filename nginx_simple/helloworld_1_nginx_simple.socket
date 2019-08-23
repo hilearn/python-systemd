@@ -1,0 +1,8 @@
+[Unit]
+Description=helloworld socket 1
+
+[Socket]
+ListenStream=/run/helloworld_1_nginx_simple/socket
+
+[Install]
+WantedBy=sockets.target
