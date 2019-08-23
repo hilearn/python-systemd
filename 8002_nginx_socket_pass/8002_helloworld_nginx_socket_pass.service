@@ -1,0 +1,21 @@
+[Unit]
+Description=helloworld simple daemon
+Requires=8002_helloworld_nginx_socket_pass.socket
+After=network.target 8002_helloworld_nginx_socket_pass.socket
+
+
+[Service]
+PIDFile=/run/8002_helloworld_nginx_socket_pass/pid
+User=www-data
+Group=www-data
+RuntimeDirectory=8002_helloworld_nginx_socket_pass
+WorkingDirectory=/var/8002_helloworld_nginx_socket_pass
+ExecStart=python3.7 serve.py \
+	--socket-path /run/8002_helloworld_nginx_socket_pass/socket
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+

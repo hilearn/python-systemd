@@ -3,7 +3,7 @@
 set -e
 set -x
 
-project_name=8001_helloworld_nginx_simple
+project_name=8002_helloworld_nginx_socket_pass
 
 destination=/var/$project_name
 
@@ -26,7 +26,7 @@ sudo service $project_name reload || sudo service $project_name start
 
 
 # Copy nginx config and enable it
-site_name=8001_$project_name
+site_name=$project_name
 sudo cp nginx_localhost.conf /etc/nginx/sites-available/$site_name
 sudo rm -f /etc/nginx/sites-enabled/$site_name
 sudo ln -s /etc/nginx/sites-available/$site_name /etc/nginx/sites-enabled/$site_name
