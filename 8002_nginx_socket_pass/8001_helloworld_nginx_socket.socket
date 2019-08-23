@@ -2,7 +2,7 @@
 Description=helloworld socket 1
 
 [Socket]
-ListenStream=/run/helloworld_1_nginx_simple/socket
+ListenStream=/run/8001_helloworld_nginx_socket/socket
 
 [Install]
 WantedBy=sockets.target

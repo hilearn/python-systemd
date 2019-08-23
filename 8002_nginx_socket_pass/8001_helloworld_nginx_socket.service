@@ -1,7 +1,7 @@
 [Unit]
 Description=helloworld simple daemon
-Requires=helloworld_1_nginx_simple.socket
-After=network.target helloworld_1_nginx_simple.socket
+Requires=8001_helloworld_nginx_socket.socket
+After=network.target 8001_helloworld_nginx_socket.socket
 
 
 [Service]

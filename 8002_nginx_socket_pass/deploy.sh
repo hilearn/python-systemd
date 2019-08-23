@@ -3,7 +3,8 @@
 set -e
 set -x
 
-project_name=helloworld_1_nginx_simple
+project_name=8001_helloworld_nginx_simple
+
 destination=/var/$project_name
 
 sudo mkdir -p $destination
