@@ -1,0 +1,8 @@
+[Unit]
+Description=helloworld socket 12
+
+[Socket]
+ListenStream=/run/8012_nginx_gunicorn_socket_pass/socket
+
+[Install]
+WantedBy=sockets.target

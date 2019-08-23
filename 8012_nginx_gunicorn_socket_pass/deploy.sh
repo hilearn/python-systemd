@@ -3,7 +3,7 @@
 set -e
 set -x
 
-project_name=helloworld_3_gunicorn_socket_global
+project_name=8012_nginx_gunicorn_socket_pass
 
 
 # Copy code to the destination directory where it will run
@@ -39,7 +39,7 @@ sudo service $project_name reload || sudo service $project_name start
 
 # Use nginx to handle outside world communications.
 # Copy nginx config and enable it
-site_name=8003_$project_name
+site_name=$project_name
 sudo cp nginx_localhost.conf /etc/nginx/sites-available/$site_name
 sudo rm -f /etc/nginx/sites-enabled/$site_name
 sudo ln -s /etc/nginx/sites-available/$site_name /etc/nginx/sites-enabled/$site_name

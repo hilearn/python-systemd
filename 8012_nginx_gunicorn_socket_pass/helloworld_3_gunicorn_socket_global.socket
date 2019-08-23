@@ -1,8 +1,0 @@
-[Unit]
-Description=helloworld socket 3
-
-[Socket]
-ListenStream=/run/helloworld_3_gunicorn_socket_global/socket
-
-[Install]
-WantedBy=sockets.target
