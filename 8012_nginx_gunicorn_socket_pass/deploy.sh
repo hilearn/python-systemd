@@ -26,6 +26,9 @@ sudo cp $project_name.service /etc/systemd/system/
 sudo cp $project_name.socket /etc/systemd/system/
 sudo cp $project_name.conf /etc/tmpfiles.d/
 
+sudo systemctl stop $project_name.socket || true
+sudo systemctl stop $project_name.service || true
+
 # Reload and restart services
 sudo systemctl daemon-reload
 
@@ -34,14 +37,13 @@ sudo systemctl enable $project_name.socket
 
 # Start the socket 
 sudo systemctl start $project_name.socket
-sudo service $project_name reload || sudo service $project_name start
+# sudo service $project_name reload || sudo service $project_name start
 
 
 # Use nginx to handle outside world communications.
 # Copy nginx config and enable it
 site_name=$project_name
 sudo cp nginx_localhost.conf /etc/nginx/sites-available/$site_name
-sudo rm -f /etc/nginx/sites-enabled/$site_name
-sudo ln -s /etc/nginx/sites-available/$site_name /etc/nginx/sites-enabled/$site_name
+sudo ln -fs /etc/nginx/sites-available/$site_name /etc/nginx/sites-enabled/$site_name
 sudo service nginx restart
 

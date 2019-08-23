@@ -2,6 +2,8 @@
 Description=helloworld socket 12
 
 [Socket]
+User=www-data
+Group=www-data
 ListenStream=/run/8012_nginx_gunicorn_socket_pass/socket
 
 [Install]

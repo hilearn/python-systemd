@@ -3,7 +3,6 @@ Description=helloworld daemon 12
 Requires=8012_nginx_gunicorn_socket_pass.socket
 After=network.target
 
-
 [Service]
 PIDFile=/run/8012_nginx_gunicorn_socket_pass/pid
 User=www-data
