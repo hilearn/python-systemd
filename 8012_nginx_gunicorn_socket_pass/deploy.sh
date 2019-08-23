@@ -5,7 +5,6 @@ set -x
 
 project_name=8012_nginx_gunicorn_socket_pass
 
-
 # Copy code to the destination directory where it will run
 # The service will run with user www-data
 destination=/var/$project_name
@@ -26,14 +25,17 @@ sudo cp $project_name.service /etc/systemd/system/
 sudo cp $project_name.socket /etc/systemd/system/
 sudo cp $project_name.conf /etc/tmpfiles.d/
 
-sudo systemctl stop $project_name.socket || true
-sudo systemctl stop $project_name.service || true
-
 # Reload and restart services
 sudo systemctl daemon-reload
 
+sudo systemctl stop $project_name.socket || true
+sudo systemctl stop $project_name.service || true
+
 # Enable the socket
 sudo systemctl enable $project_name.socket
+
+# Create /run/$project_name with correct permissions before starting the socket
+sudo systemd-tmpfiles --create
 
 # Start the socket 
 sudo systemctl start $project_name.socket
