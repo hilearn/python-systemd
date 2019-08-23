@@ -1,0 +1,23 @@
+[Unit]
+Description=helloworld daemon 12
+Requires=8022_nginx_gunicorn_flask_socket_pass.socket
+After=network.target
+
+[Service]
+PIDFile=/run/8022_nginx_gunicorn_flask_socket_pass/pid
+User=www-data
+Group=www-data
+RuntimeDirectory=8022_nginx_gunicorn_flask_socket_pass
+WorkingDirectory=/var/8022_nginx_gunicorn_flask_socket_pass
+ExecStart=gunicorn \
+	-w 2 \
+	--bind unix:/run/8022_nginx_gunicorn_flask_socket_pass/socket \
+	--pid /run/8022_nginx_gunicorn_flask_socket_pass/pid \
+	hello:app
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
